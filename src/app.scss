@@ -1,8 +1,11 @@
+@import "_colors.scss";
+
 .App {
   height: 100vh;
   width: 480px;
-  background-color: navajowhite;
+  // background-color: $main_color;
 }
+
 @media screen and (max-width: 480px) {
   .App {
     width: 100%;

@@ -1,0 +1,10 @@
+@import "_colors.scss";
+
+.header {
+  position: absolute;
+  width: auto;
+}
+
+.header button {
+  background-color: $main_color;
+}
