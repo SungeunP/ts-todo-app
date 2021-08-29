@@ -1,0 +1,50 @@
+@import "_colors.scss";
+
+.header {
+  position: absolute;
+  display: inline-block;
+  width: auto;
+  background-color: transparent;
+
+  .menu {
+    width: 50px;
+    min-width: unset !important;
+    height: 50px;
+    padding: 12px !important;
+    vertical-align: top !important;
+  }
+
+  .title_area {
+    display: inline-block;
+    width: calc(100% - 50px);
+    padding: 0px 12px;
+    box-sizing: border-box;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+}
+
+// .menu {
+//   width: 50px;
+//   min-width: unset !important;
+//   height: 50px;
+//   padding: 12px !important;
+//   vertical-align: top !important;
+// }
+
+// .title_area {
+//   display: inline-block;
+//   width: calc(100% - 50px);
+//   padding: 0px 12px;
+//   box-sizing: border-box;
+//   font-size: 2rem;
+//   font-weight: bold;
+// }
+
+.title_area .title {
+  line-height: 50px;
+  margin: 0px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
