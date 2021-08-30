@@ -1,4 +1,7 @@
+import { Avatar, List, ListItem, ListItemAvatar, ListItemIcon, ListItemSecondaryAction, ListItemText } from '@material-ui/core';
+import { RadioButtonUncheckedSharp } from '@material-ui/icons';
 import React from 'react';
+import CheckboxButton from './common/CheckboxButton';
 import styles from './todoList.module.scss'
 
 const dummy_data = [
@@ -22,11 +25,11 @@ const dummy_data = [
 const TodoList = () => {
 
   return (
-    <ul className="list">
+    <List className={styles.list}>
       {dummy_data.map( item => (
-        <ListItem {...item} />
+        <Item {...item} />
       ))}
-    </ul>
+    </List>
   )
 }
 
@@ -35,16 +38,33 @@ interface ListItemInterface {
   title: string;
   completed: boolean;
 }
-const ListItem = ({
+const Item = ({
   id,
   title,
   completed,
 }: ListItemInterface) => {
   
   return (
-    <li className="item">
-      
-    </li>
+    <ListItem button>
+      <ListItemIcon>
+        <CheckboxButton />
+      </ListItemIcon>
+      <ListItemText
+        primary={title}
+      />
+      <ListItemSecondaryAction>
+        
+      </ListItemSecondaryAction>
+      {/* <div className={styles.check}>
+        <RadioButtonUncheckedSharp style={{fontSize: '3rem'}}/>
+      </div>
+      <div className={styles.content}>
+        {title}
+      </div>
+      <div className={styles.action_area}>
+
+      </div> */}
+    </ListItem>
   )
 }
 

@@ -1,9 +1,11 @@
-@import "_colors.scss";
+@import "/src/_colors.scss";
+@import "/src/_app_viewport.scss";
 
 .header {
   position: absolute;
   display: inline-block;
-  width: auto;
+  width: $app_width;
+  height: 50px;
   background-color: transparent;
 
   .menu {
@@ -14,14 +16,38 @@
     vertical-align: top !important;
   }
 
-  .title_area {
+  .title {
     display: inline-block;
     width: calc(100% - 50px);
+    line-height: 50px;
+    margin: 0px;
     padding: 0px 12px;
-    box-sizing: border-box;
     font-size: 2rem;
     font-weight: bold;
+    box-sizing: border-box;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
+  // .title_area {
+  //   display: inline-block;
+  //   width: calc(100% - 50px);
+  //   height: 50px;
+  //   padding: 0px 12px;
+  //   box-sizing: border-box;
+  //   font-size: 2rem;
+  //   font-weight: bold;
+
+  //   .title {
+  //     display: inline-block;
+  //     width: 100%;
+  //     line-height: 50px;
+  //     margin: 0px;
+  //     white-space: nowrap;
+  //     overflow: hidden;
+  //     text-overflow: ellipsis;
+  //   }
+  // }
 }
 
 // .menu {
@@ -40,11 +66,3 @@
 //   font-size: 2rem;
 //   font-weight: bold;
 // }
-
-.title_area .title {
-  line-height: 50px;
-  margin: 0px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}

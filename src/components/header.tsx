@@ -10,9 +10,9 @@ const Header = () => {
       <Button className={styles.menu} variant="contained" color="primary">
         <MenuIcon style={{fontSize: '36px'}} />
       </Button>
-      <div className={styles.title_area}>
-        <p className={styles.title}><span className="icon">💪</span> Daily tasks </p>
-      </div>
+      {/* <div className={styles.title_area}> */}
+      <span className={styles.title}><span className="icon">💪</span> Daily tasks </span>
+      {/* </div> */}
     </div>
   )
 }
