@@ -1,6 +1,6 @@
-import { Avatar, List, ListItem, ListItemAvatar, ListItemIcon, ListItemSecondaryAction, ListItemText } from '@material-ui/core';
-import { RadioButtonUncheckedSharp } from '@material-ui/icons';
 import React from 'react';
+import { List, ListItemIcon, ListItemSecondaryAction, ListItemText, Typography } from '@material-ui/core';
+import ListItem from '../styled-mui-components/ListItem';
 import CheckboxButton from './common/CheckboxButton';
 import styles from './todoList.module.scss'
 
@@ -50,7 +50,7 @@ const Item = ({
         <CheckboxButton />
       </ListItemIcon>
       <ListItemText
-        primary={title}
+        primary={<ListItemTypo text={title}/>}
       />
       <ListItemSecondaryAction>
         
@@ -65,6 +65,15 @@ const Item = ({
 
       </div> */}
     </ListItem>
+  )
+}
+
+interface ListItemTypeInterface {
+  text: string;
+}
+const ListItemTypo = ({text}: ListItemTypeInterface) => {
+  return (
+    <Typography variant="h5" color="primary">{text}</Typography>
   )
 }
 

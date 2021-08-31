@@ -1,26 +1,6 @@
-.list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+@import "../_colors.scss";
 
-  .item {
-    $item_line_height: 70px;
-
-    display: grid;
-    grid-template-columns: 70px calc(100% - 130px) 40px;
-    gap: 10px;
-    width: 100%;
-    height: $item_line_height;
-    line-height: 70px;
-
-    .check {
-    }
-    .content {
-      line-height: $item_line_height;
-      font-size: 1.8rem;
-      font-weight: bold;
-    }
-    .action_area {
-    }
-  }
+.item_content {
+  font-size: 3rem;
+  color: $main_color;
 }
