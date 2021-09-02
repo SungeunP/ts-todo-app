@@ -4,7 +4,7 @@ const style = {
   root: {
     height: '70px',
     lineHeight: '70px',
-    padding: '0px',
+    padding: '0px 8px',
   },
 }
 
