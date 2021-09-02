@@ -1,12 +1,13 @@
 @import "_colors.scss";
+@import "_app_viewport.scss";
 
 .App {
   height: 100vh;
-  width: 480px;
+  width: $app_width;
   // background-color: $main_color;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: $app_width) {
   .App {
     width: 100%;
   }
