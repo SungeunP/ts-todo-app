@@ -27,6 +27,7 @@ const CheckboxButton = ({checked, onChange}: CheckboxButton) => {
   }, [_checked])
 
   const buttonOnClicked = (e: any) => {
+    e.stopPropagation()
     setChecked(!_checked)
   }
 
