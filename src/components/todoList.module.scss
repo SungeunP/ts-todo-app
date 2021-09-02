@@ -1,6 +1,15 @@
 @import "../_colors.scss";
 
 .item_content {
-  font-size: 3rem;
+  width: calc(100% - 70px);
+  height: 36px;
+  line-height: 36px !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.item_secondary_icon {
   color: $main_color;
+  font-size: 2rem;
 }
