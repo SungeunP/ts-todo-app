@@ -1,5 +1,11 @@
 @import "../_colors.scss";
 
+.list {
+  height: 100%;
+  overflow: auto;
+  box-sizing: border-box;
+}
+
 .item_content {
   width: calc(100% - 20px);
   height: 36px;

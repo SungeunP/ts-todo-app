@@ -1,6 +1,6 @@
 import React from 'react';
 import MenuIcon from '@material-ui/icons/Menu';
-import styles from './header.module.scss';
+import styles from 'components/header.module.scss';
 import Button from '../styled-mui-components/Button';
 
 const Header = () => {

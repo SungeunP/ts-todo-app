@@ -2,9 +2,10 @@ import React from 'react';
 import { IconButton, List, ListItem, ListItemIcon, ListItemSecondaryAction, ListItemText, Typography } from '@material-ui/core';
 // import ListItem from '../styled-mui-components/ListItem';
 import CheckboxButton from './common/CheckboxButton';
-import styles from './todoList.module.scss'
+import styles from 'components/todoList.module.scss'
 import { Delete } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles'
+import Todo from 'Todo';
 
 const dummy_data = [
   {
@@ -24,7 +25,12 @@ const dummy_data = [
   },
 ]
 
-const TodoList = () => {
+interface ITodoList {
+  items: Todo[];
+}
+const TodoList = ({
+  items
+}: ITodoList) => {
 
   const onClickItem = (e: Event) => {
     console.log('e :>> ', e);
@@ -32,7 +38,7 @@ const TodoList = () => {
 
   return (
     <List className={styles.list}>
-      {dummy_data.map( item => (
+      {items.map( item => (
         <Item {...item} onClick={onClickItem} />
       ))}
     </List>
@@ -61,7 +67,7 @@ const Item = ({
         primary={<ListItemTypo text={title}/>}
       />
       <ListItemSecondaryAction>
-        <IconButton><Delete className={styles.item_secondary_icon}/></IconButton>
+        <IconButton color="primary"><Delete className={styles.item_secondary_icon}/></IconButton>
       </ListItemSecondaryAction>
       {/* <div className={styles.check}>
         <RadioButtonUncheckedSharp style={{fontSize: '3rem'}}/>

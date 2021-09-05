@@ -1,9 +1,8 @@
-import { Check, RadioButtonUncheckedRounded } from '@material-ui/icons';
+import { Check } from '@material-ui/icons';
 import React, { useEffect, useState } from 'react';
-import Button from '../../styled-mui-components/Button';
+import Button from 'styled-mui-components/Button';
 
-import styles from './CheckboxButton.module.scss';
-console.log('styles :>> ', styles);
+import styles from 'components/common/CheckboxButton.module.scss';
 
 interface CheckboxButton {
   checked?: boolean;
