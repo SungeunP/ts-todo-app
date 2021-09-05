@@ -27,13 +27,15 @@ const dummy_data = [
 
 interface ITodoList {
   items: Todo[];
+  onEdit?: any;
 }
 const TodoList = ({
-  items
+  items,
+  onEdit,
 }: ITodoList) => {
 
-  const onClickItem = (e: Event) => {
-    console.log('e :>> ', e);
+  const onClickItem = (id: number) => {
+    onEdit(id)
   }
 
   return (
@@ -57,11 +59,15 @@ const Item = ({
   completed,
   onClick,
 }: ListItemInterface) => {
+
+  const _onClick = () => {
+    onClick(id)
+  }
   
   return (
-    <ListItem onClick={onClick} button>
+    <ListItem onClick={_onClick} button>
       <ListItemIcon>
-        <CheckboxButton />
+        <CheckboxButton checked={completed} />
       </ListItemIcon>
       <ListItemText
         primary={<ListItemTypo text={title}/>}

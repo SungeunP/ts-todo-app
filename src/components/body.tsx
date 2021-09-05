@@ -3,8 +3,8 @@ import TodoList from './todoList';
 
 import styles from 'components/body.module.scss';
 import AddTodoButton from './AddTodoButton';
-import AddTodo from './AddTodo';
 import Todo, { ITodo } from 'Todo';
+import TodoDialog, { TodoDialogTypes } from './TodoDialog';
 
 const DEFAULT_TODOS: ITodo[] = [
   new Todo('저녁에 운동하기', false),
@@ -14,31 +14,53 @@ const DEFAULT_TODOS: ITodo[] = [
 const Body = () => {
   
   const [ todos, setTodos ] = useState(DEFAULT_TODOS)
-  const [ showAddTodo, setAddTodo ] = useState(false)
+  const [ showTodoDialog, setShowTodoDialog ] = useState<boolean>(false)
+  const [ editingTodo, setEditingTodo ] = useState<Todo|null>(null)
 
+  // On add-todo button clicked
   const AddBtnClicked = () => {
-    setAddTodo(true)
+    setShowTodoDialog(true)
   }
 
+  // On todo created in todo-dialog
   const onTodoCreated = (todo: ITodo) => {
     if (todos) {
       setTodos(todos.concat([todo]))
     }
     
     setTimeout(() => { // Must be fix (state not updated issue)
-      setAddTodo(false)
+      setShowTodoDialog(false)
     }, 100)
   }
+
+  // On dialog canceled
   const onCancel = () => {
-    setAddTodo(false)
+    setShowTodoDialog(false)
   }
+
+  const setEdit = (id: number) => {
+    const targetTodo = todos.find(todo => (todo.id === id))
+    
+    if (targetTodo) {
+      setEditingTodo(targetTodo)
+      setShowTodoDialog(true)
+    } else {
+      alert('Oops, somethings wrong')
+    }
+  }
+
+  const dialogType = editingTodo ? TodoDialogTypes.Edit : TodoDialogTypes.Create
+  const dialogDefaultText = editingTodo ? editingTodo.title : undefined
 
   return (
     <div className={styles.body}>
-      <TodoList items={todos} />
+      <TodoList items={todos}
+        onEdit={setEdit} />
       <AddTodoButton onClick={AddBtnClicked} />
 
-      <AddTodo show={showAddTodo}
+      <TodoDialog show={showTodoDialog}
+        type={dialogType}
+        defaultText={dialogDefaultText}
         onCreate={onTodoCreated}
         onCancel={onCancel} />
     </div>
