@@ -2,6 +2,9 @@ class Todo {
   id: number;
   title: string;
   completed: boolean;
+  updateCompleted = (value: boolean) => {
+    this.completed = value
+  };
 
   constructor(
     title: string,
@@ -17,6 +20,7 @@ export interface ITodo {
   id: number;
   title: string;
   completed: boolean;
+  updateCompleted: any;
 }
 
 // Index

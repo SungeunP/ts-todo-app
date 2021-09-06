@@ -1,10 +1,10 @@
 import { Check } from '@material-ui/icons';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Button from 'styled-mui-components/Button';
 
 import styles from 'components/common/CheckboxButton.module.scss';
 
-interface CheckboxButton {
+interface ICheckboxButton {
   checked?: boolean;
   onChange?: Function;
 }
@@ -17,26 +17,18 @@ const buttonStyle = {
   borderRadius: '50%',
 }
 
-const CheckboxButton = ({checked, onChange}: CheckboxButton) => {
-
-  const [ _checked, setChecked ] = useState(checked)
-
-  useEffect(() => {
-    onChange && onChange(_checked)
-  }, [_checked])
+const CheckboxButton = ({checked, onChange}: ICheckboxButton) => {
 
   const buttonOnClicked = (e: any) => {
     e.stopPropagation()
-    setChecked(!_checked)
+    onChange && onChange(!checked)
   }
 
   return (
-    <Button disableRipple className={styles.checkbox_btn} style={buttonStyle} onClick={buttonOnClicked}>
+    <Button disableRipple className={styles.checkbox_btn} style={buttonStyle}
+      onClick={buttonOnClicked}>
       <div className={styles.circle}></div>
-      {/* <RadioButtonUncheckedRounded color="primary" /> */}
-      {/* {_checked && ( */}
-        <Check className={`${styles.check} ${_checked ? styles.show  : ''}`} color="primary" />
-      {/* )} */}
+      <Check className={`${styles.check} ${checked ? styles.show  : ''}`} color="primary" />
     </Button>
   )
 }

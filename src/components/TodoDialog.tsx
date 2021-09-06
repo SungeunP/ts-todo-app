@@ -23,7 +23,7 @@ const TodoDialog = ({
   onCreate,
   onCancel,
 }: TodoDialogInterface) => {
-
+  
   const [ title, setTitle ] = useState(defaultText)
   const [ showWarn, setShowWarn ] = useState(false)
 
