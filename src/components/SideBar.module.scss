@@ -1,0 +1,21 @@
+@import "/src/_colors.scss";
+@import "/src/_app_viewport.scss";
+
+.side_bar {
+  position: absolute;
+  width: 180px;
+  height: 100%;
+  left: -180px;
+  transition: left 0.2s;
+  &.show {
+    left: 0px;
+  }
+
+  .menus {
+    width: 100%;
+    height: 100%;
+    .menu {
+      height: 180px;
+    }
+  }
+}

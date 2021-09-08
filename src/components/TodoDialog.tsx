@@ -11,16 +11,20 @@ export enum TodoDialogTypes {
 interface TodoDialogInterface {
   show: boolean;
   type?: TodoDialogTypes;
+  todo?: Todo|null; // Binding when `editing type`
   defaultText?: string;
   onCreate?: any;
+  onUpdate?: any;
   onEdit?: any;
   onCancel?: any;
 }
 const TodoDialog = ({
   show,
   type = TodoDialogTypes.Create,
+  todo,
   defaultText = "",
   onCreate,
+  onUpdate,
   onCancel,
 }: TodoDialogInterface) => {
   
@@ -37,15 +41,21 @@ const TodoDialog = ({
       setShowWarn(true)
       return
     }
-    const createdItem = new Todo(_title, false)
-    onCreate && onCreate(createdItem)
+    if (todo) { // In editing state
+      onUpdate && onUpdate({...todo,
+        title: _title,
+      })
+    } else {
+      const createdItem = new Todo(_title, false)
+      onCreate && onCreate(createdItem)
+    }
     _onCancel()
   }
 
   // On canceled
   const _onCancel = (e?: any) => {
     onCancel && onCancel()
-    setTitle("")
+    // setTitle("")
   }
 
   // On confirm
