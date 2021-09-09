@@ -26,7 +26,7 @@ const DEFAULT_TODOS: ITodo[] = [
 ]
 
 interface IBody {
-  todos: Todo[];
+  todos: Todo[]|null;
   // editingTodo: Todo|null;
   // setEditingTodo?: any;
   // onTodoChecked?: any;
@@ -63,13 +63,15 @@ const Body = ({
   }
 
   const _setEditingTodo = (id: number) => {
-    const targetTodo = todos.find(todo => (todo.id === id))
-    
-    if (targetTodo) {
-      setEditingTodo(targetTodo)
-      setShowTodoDialog(true)
-    } else {
-      setShowWarn(true)
+    if (todos) {
+      const targetTodo = todos.find(todo => (todo.id === id))
+      
+      if (targetTodo) {
+        setEditingTodo(targetTodo)
+        setShowTodoDialog(true)
+      } else {
+        setShowWarn(true)
+      }
     }
   }
 
@@ -93,17 +95,19 @@ const Body = ({
 
   // On todo checked
   const onTodoChecked = (id: number, checked: boolean) => {
-    const targetTodo = todos.find(todo => (todo.id === id))
-    if (!targetTodo) {
-      onTodoEdited(null)
-      console.error('onTodoChecked - todo not finded!!')
-      return
+    if (todos) {
+      const targetTodo = todos.find(todo => (todo.id === id))
+      if (!targetTodo) {
+        onTodoEdited(null)
+        console.error('onTodoChecked - todo not finded!!')
+        return
+      }
+  
+      const assignedTodo = {...targetTodo,
+        completed: checked
+      }
+      onTodoEdited(assignedTodo)
     }
-
-    const assignedTodo = {...targetTodo,
-      completed: checked
-    }
-    onTodoEdited(assignedTodo)
   }
 
   const dialogType = editingTodo ? TodoDialogTypes.Edit : TodoDialogTypes.Create

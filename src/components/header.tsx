@@ -2,8 +2,14 @@ import React from 'react';
 import MenuIcon from '@material-ui/icons/Menu';
 import styles from 'components/header.module.scss';
 import Button from '../styled-mui-components/Button';
+import { Tab } from 'App';
 
-const Header = () => {
+interface IHeader {
+  tab: Tab|null;
+}
+const Header = ({
+  tab,
+}: IHeader) => {
 
   return (
     <div className={styles.header}>
