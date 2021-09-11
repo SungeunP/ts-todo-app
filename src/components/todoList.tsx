@@ -4,7 +4,7 @@ import CheckboxButton from './common/CheckboxButton';
 import styles from 'components/todoList.module.scss'
 import { Delete } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles'
-import Todo from 'Todo';
+import Todo from 'types/Todo';
 
 interface ITodoList {
   items: Todo[]|null;

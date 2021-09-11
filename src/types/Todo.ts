@@ -2,9 +2,6 @@ class Todo {
   id: number;
   title: string;
   completed: boolean;
-  updateCompleted = (value: boolean) => {
-    this.completed = value
-  };
 
   constructor(
     title: string,
@@ -20,13 +17,12 @@ export interface ITodo {
   id: number;
   title: string;
   completed: boolean;
-  updateCompleted: any;
 }
 
 // Index
-let todoIndex = 0
+let index = 0
 const getIndex = () => {
-  return todoIndex++
+  return index++
 }
 
 export default Todo

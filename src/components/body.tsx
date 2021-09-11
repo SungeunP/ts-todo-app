@@ -3,36 +3,18 @@ import TodoList from './todoList';
 
 import styles from 'components/body.module.scss';
 import AddTodoButton from './AddTodoButton';
-import Todo, { ITodo } from 'Todo';
+import Todo, { ITodo } from 'types/Todo';
 import TodoDialog, { TodoDialogTypes } from './TodoDialog';
 import { Snackbar } from '@material-ui/core';
-
-const DEFAULT_TODOS: ITodo[] = [
-  new Todo('저녁에 운동하기', false),
-  new Todo('유튜브 영상 보기', false),
-  new Todo('방 청소하기', false),
-  new Todo('저녁에 운동하기', false),
-  new Todo('유튜브 영상 보기', false),
-  new Todo('방 청소하기', false),
-  new Todo('저녁에 운동하기', false),
-  new Todo('유튜브 영상 보기', false),
-  new Todo('방 청소하기', false),
-  new Todo('저녁에 운동하기', false),
-  new Todo('유튜브 영상 보기', false),
-  new Todo('방 청소하기', false),
-  new Todo('저녁에 운동하기', false),
-  new Todo('유튜브 영상 보기', false),
-  new Todo('방 청소하기', false),
-]
 
 interface IBody {
   todos: Todo[]|null;
   // editingTodo: Todo|null;
   // setEditingTodo?: any;
   // onTodoChecked?: any;
-  onTodoDeleted?: any;
-  onTodoEdited?: any;
-  onTodoCreated?: any;
+  onTodoDeleted: (id: number) => void;
+  onTodoEdited: (todo: Todo) => void;
+  onTodoCreated: (todo: Todo) => void;
 }
 const Body = ({
   todos,
@@ -98,7 +80,6 @@ const Body = ({
     if (todos) {
       const targetTodo = todos.find(todo => (todo.id === id))
       if (!targetTodo) {
-        onTodoEdited(null)
         console.error('onTodoChecked - todo not finded!!')
         return
       }

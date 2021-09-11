@@ -2,7 +2,7 @@ import { Dialog, DialogActions, DialogContent, DialogTitle, TextField, Button, S
 import React, { useEffect, useState } from 'react';
 
 import styles from 'components/TodoDialog.module.scss';
-import Todo from 'Todo';
+import Todo from 'types/Todo';
 
 export enum TodoDialogTypes {
   Create = "CREATE",

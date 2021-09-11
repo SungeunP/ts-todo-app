@@ -2,6 +2,7 @@
 @import "_app_viewport.scss";
 
 .App {
+  position: relative;
   height: 100vh;
   width: $app_width;
   // background-color: $main_color;
