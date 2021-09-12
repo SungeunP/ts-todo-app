@@ -1,2 +1,34 @@
 @import "/src/_colors.scss";
-@import "/src/_app_viewport.scss";
+
+.tabs {
+  width: 0px;
+  height: 100%;
+  background-color: $main_color;
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+  transition: width 0.2s;
+
+  &.open {
+    display: block;
+    width: 180px;
+  }
+
+  .tab {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 180px;
+    padding: 36px 12px;
+    text-align: center;
+    box-sizing: border-box;
+
+    .icon {
+      font-size: 2.4rem;
+    }
+    .title {
+      font-size: 1.4rem;
+      margin: 0;
+    }
+  }
+}

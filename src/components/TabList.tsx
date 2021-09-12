@@ -1,24 +1,26 @@
-import React from 'react';
-import styles from 'components/GroupList.module.scss';
+import React, { useEffect } from 'react';
+import styles from 'components/TabList.module.scss';
 import Button from '../styled-mui-components/Button';
 import TTab from 'types/Tab';
 
 interface ITabList {
+  open: boolean;
   tabs: TTab[];
   onTabClick: (tab: TTab) => void;
 }
 const TabList = ({
+  open,
   tabs,
   onTabClick,
 }: ITabList) => {
-  
+
   const _onTabClick = (id: number) => {
     
     return undefined
   }
 
   return (
-    <ul className="menu">
+    <ul className={`${styles.tabs} ${open ? styles.open : ''}`}>
       {tabs?.map(tab => (
         <TabItem {...tab} onClick={_onTabClick} />
       ))}
@@ -35,9 +37,9 @@ const TabItem = ({
   title,
   onClick,
 }: IGroup) => (
-  <li className="menu" onClick={() => onClick(id)}>
-    <div className="icon">{icon}</div>
-    <p className="title">{title}</p>  
+  <li className={styles.tab} onClick={() => onClick(id)}>
+    <div className={styles.icon}>{icon}</div>
+    <p className={styles.title}>{title}</p>  
   </li>
 )
 

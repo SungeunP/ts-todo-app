@@ -20,7 +20,7 @@ const TODOS_DAILY_TASKS: ITodo[] = [
 const TABS:Tab[] = [
   new Tab('💪', 'Daily tasks', TODOS_DAILY_TASKS),
   new Tab('📖', 'Daily tasks', TODOS_DAILY_TASKS),
-  new Tab('🎞', 'Daily tasks', TODOS_DAILY_TASKS),
+  new Tab('🎃', 'Daily tasks', TODOS_DAILY_TASKS),
 ]
 
 function App() {
@@ -120,7 +120,7 @@ function App() {
 
   const todos = tabSelection?.todos ?? null
 
-  return (
+  return (<>
     <div className={styles.App}>{tabs ? (<>
       <Header tab={tabSelection}
         onMenuClick={onMenuClicked} />
@@ -135,21 +135,20 @@ function App() {
     </>) : (
       <Typography variant="h4" color="primary">Loading ..</Typography>
     )}
+
     
     <SideBar open={showMenu}
       onClose={onSidebarClose}>
       {tabs ? (
-        <TabList tabs={tabs}
+        <TabList open={showMenu} tabs={tabs}
           onTabClick={onTabClick} />
-      ) : (
-        <Typography>Loading ..</Typography>     
-      )
-
-      }
+      ) : showMenu ? (
+        <Typography>Loading ..</Typography>
+      ) : <></>}
     </SideBar>
 
     </div>
-  );
+  </>);
 }
 
 export default App;
