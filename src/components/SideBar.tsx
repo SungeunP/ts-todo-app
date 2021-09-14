@@ -12,30 +12,39 @@ const SideBar = ({
   onClose,
 }: ISideBar) => {
 
-  const [ displayNone, setDisplayNone ] = useState(!open)
+  
+  const [ _open, setOpen ] = useState(false)
+  const [ runAnimation, setRunAnimation ] = useState(false)
   const ANIMATION_MS = 200
 
   useEffect(() => {
     if (open) {
-      setDisplayNone(false)
+      setOpen(true)
     } else {
+      setRunAnimation(false)
       setTimeout(() => {
-        console.log('displayNone set to false', displayNone)
-        setDisplayNone(true)
+        setOpen(false)
       }, ANIMATION_MS)
     }
   }, [open])
 
+  useEffect(() => {
+    if (_open) {
+      setRunAnimation(true)
+    } 
+  }, [_open])
+
   const _onClose = () => {
     onClose && onClose()
   }
-  console.log('displayNone :>> ', displayNone);
-  return (
-    <div className={`${styles.side_bar} ${open ? styles.show : ''} ${displayNone ? styles.none : ''}`}
+
+  return _open ? (
+    <div className={`${styles.side_bar} ${_open ? styles.show : ''} ${runAnimation ? styles.open : ''}`}
       onClick={_onClose}>
       {children}
     </div>
-  )
+  ) : null
+  
 }
 
 export default SideBar
