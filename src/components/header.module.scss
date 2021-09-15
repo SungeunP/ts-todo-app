@@ -10,6 +10,9 @@
   @media screen and (max-width: $app_width) {
     width: 100%;
   }
+  * {
+    vertical-align: top;
+  }
 
   .menu {
     width: 50px;
@@ -19,9 +22,14 @@
     vertical-align: top !important;
   }
 
+  .icon {
+    width: 50px;
+    height: 50px;
+  }
+
   .title {
     display: inline-block;
-    width: calc(100% - 50px);
+    width: calc(100% - 100px);
     line-height: 50px;
     margin: 0px;
     padding: 0px 12px;
@@ -32,40 +40,4 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  // .title_area {
-  //   display: inline-block;
-  //   width: calc(100% - 50px);
-  //   height: 50px;
-  //   padding: 0px 12px;
-  //   box-sizing: border-box;
-  //   font-size: 2rem;
-  //   font-weight: bold;
-
-  //   .title {
-  //     display: inline-block;
-  //     width: 100%;
-  //     line-height: 50px;
-  //     margin: 0px;
-  //     white-space: nowrap;
-  //     overflow: hidden;
-  //     text-overflow: ellipsis;
-  //   }
-  // }
 }
-
-// .menu {
-//   width: 50px;
-//   min-width: unset !important;
-//   height: 50px;
-//   padding: 12px !important;
-//   vertical-align: top !important;
-// }
-
-// .title_area {
-//   display: inline-block;
-//   width: calc(100% - 50px);
-//   padding: 0px 12px;
-//   box-sizing: border-box;
-//   font-size: 2rem;
-//   font-weight: bold;
-// }

@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from 'components/TabList.module.scss';
-import Button from '../styled-mui-components/Button';
 import TTab from 'types/Tab';
+import Typography from '@material-ui/core/Typography'
 
 interface ITabList {
   open: boolean;
@@ -15,14 +15,17 @@ const TabList = ({
 }: ITabList) => {
 
   const _onTabClick = (id: number) => {
-    
-    return undefined
+    const tab = tabs.find(_tab => _tab.id === id)
+    if (tab) {
+      onTabClick(tab)
+    }
   }
 
   return (
     <ul className={`${styles.tabs} ${open ? styles.open : ''}`}>
       {tabs?.map(tab => (
-        <TabItem {...tab} onClick={_onTabClick} />
+        <TabItem {...tab} 
+          onClick={_onTabClick} />
       ))}
     </ul>
   )
@@ -36,11 +39,20 @@ const TabItem = ({
   icon,
   title,
   onClick,
-}: IGroup) => (
-  <li className={styles.tab} onClick={() => onClick(id)}>
-    <div className={styles.icon}>{icon}</div>
-    <p className={styles.title}>{title}</p>  
-  </li>
-)
+}: IGroup) => {
+
+  const [ isHover, setIsHover ] = useState(false)
+
+  return (
+    <li className={`${styles.tab} ${isHover ? styles.hover : ''}`} 
+      onClick={() => onClick(id)}
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)}>
+      <div className={styles.icon}>{icon}</div>
+      
+      <Typography className={styles.title} variant="h5">{title}</Typography>  
+    </li>
+  )
+}
 
 export default TabList

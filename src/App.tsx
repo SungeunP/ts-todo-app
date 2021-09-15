@@ -19,8 +19,8 @@ const TODOS_DAILY_TASKS: ITodo[] = [
 
 const TABS:Tab[] = [
   new Tab('💪', 'Daily tasks', TODOS_DAILY_TASKS),
-  new Tab('📖', 'Daily tasks', TODOS_DAILY_TASKS),
-  new Tab('🎃', 'Daily tasks', TODOS_DAILY_TASKS),
+  new Tab('📖', 'Study', TODOS_DAILY_TASKS),
+  new Tab('🎮', 'Games', TODOS_DAILY_TASKS),
 ]
 
 function App() {
@@ -115,7 +115,7 @@ function App() {
 
   // On tab clicked
   const onTabClick = (tab: Tab) => {
-    console.log('Clicked tab :>> ', tab);
+    setTabSelection(tab)
   }
 
   const todos = tabSelection?.todos ?? null
@@ -124,14 +124,13 @@ function App() {
     <div className={styles.App}>{tabs ? (<>
       <Header tab={tabSelection}
         onMenuClick={onMenuClicked} />
-        {todos ? (
-          <Body todos={todos}
-            onTodoCreated={onTodoCreated}
-            onTodoDeleted={onTodoDeleted}
-            onTodoEdited={onTodoEdited} />
-        ) : (
-          <Typography variant="h5" color="primary" style={{marginTop: '50px'}}> Try create group! </Typography>
-        )}
+      {todos && (
+        <Body todos={todos}
+          onTodoCreated={onTodoCreated}
+          onTodoDeleted={onTodoDeleted}
+          onTodoEdited={onTodoEdited} />
+      )}
+      {/* <Typography variant="h5" color="primary" style={{marginTop: '50px'}}> Try create group! </Typography> */}
     </>) : (
       <Typography variant="h4" color="primary">Loading ..</Typography>
     )}
