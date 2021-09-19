@@ -2,7 +2,7 @@ import { Typography } from '@material-ui/core';
 import TabList from 'components/TabList';
 import SideBar from 'components/SideBar';
 import React, { useEffect, useState } from 'react';
-import Tab from 'types/Tab';
+import Tab, { TTab } from 'types/Tab';
 import Todo, { ITodo } from 'types/Todo';
 import styles from './app.module.scss';
 import Body from './components/body';
@@ -16,51 +16,52 @@ const TODOS_DAILY_TASKS: ITodo[] = [
   new Todo('유튜브 영상 보기', false),
   new Todo('방 청소하기', false),
 ]
+const TODOS_STUDY: ITodo[] = [
+  new Todo('강의 듣기', false),
+]
+const TODOS_GAMES: ITodo[] = [
+  new Todo('Marvel\'s Spider-Man', false),
+  new Todo('Last of us', false),
+  new Todo('롤 그마', false),
+  new Todo('몬헌', false),
+]
 
-const TABS:Tab[] = [
+const TABS:TTab[] = [
   new Tab('💪', 'Daily tasks', TODOS_DAILY_TASKS),
-  new Tab('📖', 'Study', TODOS_DAILY_TASKS),
-  new Tab('🎮', 'Games', TODOS_DAILY_TASKS),
+  new Tab('📖', 'Study', TODOS_STUDY),
+  new Tab('🎮', 'Games', TODOS_GAMES),
 ]
 
 function App() {
 
-  const [ showMenu, setShowMenu ] = useState<boolean>(false)
+  const [ showTab, setShowTab ] = useState<boolean>(false)
   
   // All todo datas
-  const [ tabs, setTabs ] = useState<Tab[]|null>(null)
-  const [ tabSelection, setTabSelection ] = useState<Tab|null>(null)
+  const [ tabs, setTabs ] = useState<TTab[]|null>(null)
+  const [ tabSelection, setTabSelection ] = useState<TTab|null>(null)
   const updateTodos = (todos:Todo[]) => {
     if (tabSelection) {
+      console.log('tabSelection :>> ', tabSelection);
       setTabSelection({...tabSelection,
         todos: todos,
       })
     }
   }
-  // todos (current displayed)
-  // const [ todos, setTodos ] = useState<Todo[]|null>()
-  // const updateCheckedTodo = (id: number, updatedTodo: Todo) => { // Update current checked todo
-  //   setTodos(todos.map((todo: Todo) => {
-  //     if (id === todo.id) {
-  //       return updatedTodo
-  //     }
-  //     return todo
-  //   }))
-  // }
 
   useEffect(() => {
-    setTimeout(() => {
-      setTabs(TABS)
-    }, 300)
+    if (!tabs) { // When initialize
+      setTimeout(() => {
+        setTabs(TABS)
+        if (TABS[0]) { // If tab exist then, binding todos
+          setTabSelection(TABS[0])
+        }
+      }, 300)
+    }
   }, [])
 
   // On initialized `data` state
   useEffect(() => {
-    if (tabs) {
-      if (tabs[0]) { // If tab exist then, binding todos
-        setTabSelection(tabs[0])
-      }
-    }
+    
   }, [tabs])
 
   const deleteTodo = (id: number) => {
@@ -104,18 +105,42 @@ function App() {
   }
 
   // On menu clicked in header
-  const onMenuClicked = () => {
-    setShowMenu(true)
+  const onTabClicked = () => {
+    setShowTab(true)
   }
 
   // On SideBar closed
   const onSidebarClose = () => {
-    setShowMenu(false)
+    setShowTab(false)
   }
 
   // On tab clicked
-  const onTabClick = (tab: Tab) => {
-    setTabSelection(tab)
+  const onTabClick = (tab: TTab) => {
+    if (tabs) {
+      const { id:currentTabId } = tabSelection ?? {}
+      const updatedTabs = tabs.map(_tab => (
+        _tab.id === currentTabId ? tabSelection ?? _tab : _tab
+      ))
+
+      setTabs(updatedTabs)
+      setTabSelection(tab)
+    }
+  }
+
+  // On edit title of group
+  const onEditTitle = (editedTitle: string) => {
+    if (tabs && tabSelection) {
+      const updatedTab = {...tabSelection,
+        title: editedTitle,
+      }
+      setTabs(tabs.map(tab => (  // Update state tabs
+        tab.id === tabSelection.id ? updatedTab : tab
+      )))
+      setTabSelection(updatedTab)
+      // console.log('updated :>> ', updated);
+      // console.log('updated', tabSelection.setTitle(editedTitle));
+      // console.log('tabSelection :>> ', tabSelection);
+    }
   }
 
   const todos = tabSelection?.todos ?? null
@@ -123,7 +148,8 @@ function App() {
   return (<>
     <div className={styles.App}>{tabs ? (<>
       <Header tab={tabSelection}
-        onMenuClick={onMenuClicked} />
+        onTabClick={onTabClicked}
+        onEditTitle={onEditTitle} />
       {todos && (
         <Body todos={todos}
           onTodoCreated={onTodoCreated}
@@ -136,12 +162,12 @@ function App() {
     )}
 
     
-    <SideBar open={showMenu}
+    <SideBar open={showTab}
       onClose={onSidebarClose}>
       {tabs ? (
-        <TabList open={showMenu} tabs={tabs}
+        <TabList open={showTab} tabs={tabs}
           onTabClick={onTabClick} />
-      ) : showMenu ? (
+      ) : showTab ? (
         <Typography>Loading ..</Typography>
       ) : <></>}
     </SideBar>

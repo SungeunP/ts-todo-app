@@ -16,6 +16,11 @@ class Tab {
     this.title = title
     this.todos = todos
   }
+
+  setTitle(updatedTitle: string) {
+    this.title = updatedTitle
+    return this
+  }
 }
 
 export type TTab = {
@@ -23,6 +28,7 @@ export type TTab = {
   icon: string;
   title: string;
   todos: Todo[];
+  setTitle: (updatedTitle: string) => void;
 }
 
 // Index
