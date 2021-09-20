@@ -42,8 +42,9 @@ const IconEditor = ({
   onConfirm,
 }: IIconEditor) => {
 
-  // 
-  const [ icons, setIcons ] = useState<string[]|null>(null)
+  // All icons
+  const [ icons, setIcons ] = useState<string[]>([])
+
   // Current selected icon in icon-picker
   const [ editingIcon, setEditingIcon ] = useState(defaultIcon)
   // Current inputed icon
@@ -51,11 +52,9 @@ const IconEditor = ({
 
   // Fetch icons
   useEffect(() => {
-    if (!icons) {
-      setTimeout(() => {
-        setIcons(DEFAULT_ICONS)
-      }, 300)
-    }
+    setTimeout(() => {
+      setIcons(DEFAULT_ICONS)
+    }, 300)
   }, [])
 
   // Update `editingIcon` state when update props
@@ -101,8 +100,7 @@ const IconEditor = ({
   const onInputKeyPress = (e: any) => {
     const { key } = e
     if (key === 'Enter' && inputedIcon.trim() !== "") {
-      onConfirm(inputedIcon)
-      _onClose()
+      onConfirmBtnClicked()
     }
   }
 
@@ -110,6 +108,12 @@ const IconEditor = ({
   const onConfirmBtnClicked = () => {
     onConfirm(inputedIcon.trim() !== "" ? inputedIcon : editingIcon)
     _onClose()
+    const isNewIcon = !(icons?.find(icon => icon === inputedIcon))
+    console.log('isNewIcon :>> ', isNewIcon);
+    if (isNewIcon) {
+      console.log('New icon inputed >> ', isNewIcon)
+      setIcons([inputedIcon].concat(icons))
+    }
   }
 
 
