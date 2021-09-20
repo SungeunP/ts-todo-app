@@ -14,7 +14,6 @@ const TabList = ({
   tabs,
   onTabClick,
 }: ITabList) => {
-  console.log('tabs :>> ', tabs);
   const _onTabClick = (id: number) => {
     const tab = tabs.find(_tab => _tab.id === id)
     if (tab) {

@@ -41,7 +41,6 @@ function App() {
   const [ tabSelection, setTabSelection ] = useState<TTab|null>(null)
   const updateTodos = (todos:Todo[]) => {
     if (tabSelection) {
-      console.log('tabSelection :>> ', tabSelection);
       setTabSelection({...tabSelection,
         todos: todos,
       })
@@ -127,7 +126,7 @@ function App() {
     }
   }
 
-  // On edit title of group
+  // On edit title of tab
   const onEditTitle = (editedTitle: string) => {
     if (tabs && tabSelection) {
       const updatedTab = {...tabSelection,
@@ -137,9 +136,19 @@ function App() {
         tab.id === tabSelection.id ? updatedTab : tab
       )))
       setTabSelection(updatedTab)
-      // console.log('updated :>> ', updated);
-      // console.log('updated', tabSelection.setTitle(editedTitle));
-      // console.log('tabSelection :>> ', tabSelection);
+    }
+  }
+
+  // On edit icon of tab
+  const onEditIcon = (editedIcon: string) => {
+    if (tabs && tabSelection) {
+      const updatedTab = {...tabSelection,
+        icon: editedIcon,
+      }
+      setTabs(tabs.map(tab => (  // Update state tabs
+        tab.id === tabSelection.id ? updatedTab : tab
+      )))
+      setTabSelection(updatedTab)
     }
   }
 
@@ -149,7 +158,8 @@ function App() {
     <div className={styles.App}>{tabs ? (<>
       <Header tab={tabSelection}
         onTabClick={onTabClicked}
-        onEditTitle={onEditTitle} />
+        onEditTitle={onEditTitle}
+        onEditIcon={onEditIcon} />
       {todos && (
         <Body todos={todos}
           onTodoCreated={onTodoCreated}

@@ -1,27 +1,56 @@
-// @import "/src/_colors.scss";
+@import "/src/_colors.scss";
 @import "/src/_app_viewport.scss";
 
 .popover_content {
-  width: 120px;
-
-  /* Popover contents */
-  .edit_title {
-    input {
-      width: $app_width - 158px;
-      height: 50px;
-      line-height: 50px;
-      font-size: 1.4rem;
-      padding: 12px;
-      box-sizing: border-box;
-    }
-  }
-
-  .confirm_button {
-    width: 50px;
-    min-width: unset;
-    height: 50px;
+  .popover_wrap {
+    width: 166px;
     padding: 8px;
-    box-sizing: border-box;
-    vertical-align: top;
+
+    /* Popover contents */
+    .icon_picker {
+      display: grid;
+      max-height: 166px;
+      grid-template-columns: 50px 50px 50px;
+      gap: 8px;
+      margin-bottom: 8px;
+      overflow-y: auto;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      .icon {
+        width: 50px;
+        height: 50px;
+        color: #000;
+        &.selected {
+          background-color: rgba(63, 79, 80, 0.54);
+        }
+      }
+    }
+
+    .input_icon {
+      display: grid;
+      grid-template-columns: calc(100% - 58px) 50px;
+      gap: 8px;
+
+      .input {
+        height: 50px;
+        line-height: 50px;
+        input {
+          height: 50px;
+          font-size: 1rem;
+          padding: 0px;
+        }
+      }
+    }
+
+    .confirm_button {
+      width: 50px;
+      min-width: unset;
+      height: 50px;
+      padding: 8px;
+      box-sizing: border-box;
+      vertical-align: top;
+    }
   }
 }

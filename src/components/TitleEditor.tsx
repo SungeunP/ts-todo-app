@@ -27,7 +27,6 @@ const TitleEditor = ({
   const [ editingTitle, setEditingTitle ] = useState(defaultTitle)
   const onChangeEditingTitle = (e: any) => {
     const { value } = e.currentTarget
-    console.log('value :>> ', value);
     setEditingTitle(value)
   }
   
@@ -48,7 +47,6 @@ const TitleEditor = ({
   }
 
   const onInputKeyPress = (e: any) => {
-    console.log('e.key :>> ', e.key);
     if (e.key === 'Enter') { // On enter
       onConfirmBtnClicked()
     }
