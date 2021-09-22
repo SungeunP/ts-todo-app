@@ -16,6 +16,11 @@
       padding: 12px;
       box-sizing: border-box;
     }
+    @media screen and(max-width: $app_width) {
+      input {
+        width: calc(100vw - 158px);
+      }
+    }
   }
 
   .confirm_button {

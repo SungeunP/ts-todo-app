@@ -34,8 +34,11 @@ const SideBar = ({
     } 
   }, [_open])
 
-  const _onClose = () => {
-    onClose && onClose()
+  const _onClose = (e: any) => {
+    const { target, currentTarget } = e
+    if (target === currentTarget) {
+      onClose && onClose()
+    }
   }
 
   return _open ? (

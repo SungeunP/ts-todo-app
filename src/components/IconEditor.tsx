@@ -109,9 +109,7 @@ const IconEditor = ({
     onConfirm(inputedIcon.trim() !== "" ? inputedIcon : editingIcon)
     _onClose()
     const isNewIcon = !(icons?.find(icon => icon === inputedIcon))
-    console.log('isNewIcon :>> ', isNewIcon);
     if (isNewIcon) {
-      console.log('New icon inputed >> ', isNewIcon)
       setIcons([inputedIcon].concat(icons))
     }
   }

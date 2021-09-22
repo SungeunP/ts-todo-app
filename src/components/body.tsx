@@ -8,7 +8,7 @@ import TodoDialog, { TodoDialogTypes } from './TodoDialog';
 import { Snackbar } from '@material-ui/core';
 
 interface IBody {
-  todos: Todo[]|null;
+  todos: Todo[];
   // editingTodo: Todo|null;
   // setEditingTodo?: any;
   // onTodoChecked?: any;

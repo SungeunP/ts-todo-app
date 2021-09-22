@@ -71,7 +71,7 @@ const Header = ({
             onConfirm={onEditIcon} />
 
           <Button className={styles.title} onClick={onClickTitle}>
-            {title} 
+            {title}
           </Button>
           <TitleEditor open={showTitleEditor}
             defaultTitle={title}

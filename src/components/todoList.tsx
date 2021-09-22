@@ -7,7 +7,7 @@ import { withStyles } from '@material-ui/core/styles'
 import Todo from 'types/Todo';
 
 interface ITodoList {
-  items: Todo[]|null;
+  items: Todo[];
   onEdit?: any;
   onCheckChange: any;
   onDelete: any;
@@ -19,15 +19,17 @@ const TodoList = ({
   onDelete,
 }: ITodoList) => {
 
+  const isItemsExist = items.length > 0
+
   return (
     <List className={styles.list}>
-      {items ? items.map( item => (
+      {isItemsExist ? items.map( item => (
         <Item {...item}
           onClick={onEdit}
           onCheckChange={onCheckChange}
           onDelete={onDelete} />
       )) : (
-        <Typography variant='h5' >No todos</Typography>
+        <Typography variant='h4' >Try create todo !</Typography>
       )}
     </List>
   )

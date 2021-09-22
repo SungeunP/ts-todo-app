@@ -87,7 +87,7 @@ const TodoDialog = ({
 
   return (
     <Dialog className={styles.add_todo}
-      fullWidth={true}  
+      fullWidth={true}
       open={show}
       onClose={_onCancel}>
       <DialogTitle>{displayedTitlePrefix} todo</DialogTitle>

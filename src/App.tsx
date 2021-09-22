@@ -34,7 +34,7 @@ const TABS:TTab[] = [
 
 function App() {
 
-  const [ showTab, setShowTab ] = useState<boolean>(false)
+  const [ showSidebar, setShowSidebar ] = useState<boolean>(false)
   
   // All todo datas
   const [ tabs, setTabs ] = useState<TTab[]|null>(null)
@@ -105,12 +105,12 @@ function App() {
 
   // On menu clicked in header
   const onTabClicked = () => {
-    setShowTab(true)
+    setShowSidebar(true)
   }
 
   // On SideBar closed
   const onSidebarClose = () => {
-    setShowTab(false)
+    setShowSidebar(false)
   }
 
   // On tab clicked
@@ -124,6 +124,13 @@ function App() {
       setTabs(updatedTabs)
       setTabSelection(tab)
     }
+    setShowSidebar(false)
+  }
+
+  // On tab create from TabList component
+  const onTabCreate = (tab: TTab) => {
+    setTabs([tab].concat(tabs ?? []))
+    setTabSelection(tab)
   }
 
   // On edit title of tab
@@ -152,7 +159,7 @@ function App() {
     }
   }
 
-  const todos = tabSelection?.todos ?? null
+  const todos = tabSelection?.todos ?? []
 
   return (<>
     <div className={styles.App}>{tabs ? (<>
@@ -172,12 +179,14 @@ function App() {
     )}
 
     
-    <SideBar open={showTab}
+    <SideBar open={showSidebar}
       onClose={onSidebarClose}>
       {tabs ? (
-        <TabList open={showTab} tabs={tabs}
-          onTabClick={onTabClick} />
-      ) : showTab ? (
+        <TabList open={showSidebar}
+          tabs={tabs}
+          onTabClick={onTabClick}
+          onTabCreate={onTabCreate} />
+      ) : showSidebar ? (
         <Typography>Loading ..</Typography>
       ) : <></>}
     </SideBar>

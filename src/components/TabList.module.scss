@@ -1,14 +1,23 @@
 @import "/src/_colors.scss";
 
+.add_tab {
+  width: 180px;
+  height: 60px;
+  background-color: $main_color;
+}
+
 .tabs {
   width: 180px;
-  height: 100%;
+  height: calc(100% - 60px);
   background-color: $main_color;
   list-style: none;
   padding: 0px;
   margin: 0px;
   transition: width 0.2s;
-
+  overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   &.open {
     display: block;
     // width: 180px;
