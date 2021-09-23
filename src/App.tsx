@@ -129,6 +129,7 @@ function App() {
 
   // On tab create from TabList component
   const onTabCreate = (tab: TTab) => {
+    setShowSidebar(false)
     setTabs([tab].concat(tabs ?? []))
     setTabSelection(tab)
   }
