@@ -4,6 +4,16 @@
   height: 100%;
   overflow: auto;
   box-sizing: border-box;
+  .create_todo_desc {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    .text {
+      max-width: calc(100% - 24px);
+    }
+  }
 }
 
 .item_content {

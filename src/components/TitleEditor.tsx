@@ -52,7 +52,7 @@ const TitleEditor = ({
     }
   }
 
-  const placeHolder = editingTitle ? editingTitle : 'Input text to update!'
+  const placeHolder = defaultTitle ? defaultTitle : 'Input text to update!'
 
   return (
     <Popover className={styles.popover_content} open={open} 

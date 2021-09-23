@@ -1,25 +1,31 @@
 import React from 'react';
-import { IconButton, List, ListItem, ListItemIcon, ListItemSecondaryAction, ListItemText, Typography } from '@material-ui/core';
+import { Box, IconButton, List, ListItem, ListItemIcon, ListItemSecondaryAction, ListItemText, Paper, Typography } from '@material-ui/core';
 import CheckboxButton from './common/CheckboxButton';
 import styles from 'components/todoList.module.scss'
 import { Delete } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles'
 import Todo from 'types/Todo';
+import { getWording, wording_type } from 'Wording';
 
 interface ITodoList {
   items: Todo[];
   onEdit?: any;
   onCheckChange: any;
   onDelete: any;
+  onCreateAction: () => void;
 }
 const TodoList = ({
   items,
   onEdit,
   onCheckChange,
   onDelete,
+  onCreateAction,
 }: ITodoList) => {
 
   const isItemsExist = items.length > 0
+
+  const todoListPlaceHolder = "🤷‍♂️ Make a todo 🤷‍♀️"
+  // const todoListPlaceHolder = isItemsExist ? null : getWording(wording_type.todolist_placeholder)
 
   return (
     <List className={styles.list}>
@@ -29,7 +35,12 @@ const TodoList = ({
           onCheckChange={onCheckChange}
           onDelete={onDelete} />
       )) : (
-        <Typography variant='h4' >Try create todo !</Typography>
+        <div className={styles.create_todo_desc}>
+          <Typography className={styles.text} variant="h5" color="primary"
+            onClick={() => onCreateAction()} >
+            {todoListPlaceHolder}
+          </Typography>
+        </div>
       )}
     </List>
   )

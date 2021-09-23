@@ -9,18 +9,12 @@ import { Snackbar } from '@material-ui/core';
 
 interface IBody {
   todos: Todo[];
-  // editingTodo: Todo|null;
-  // setEditingTodo?: any;
-  // onTodoChecked?: any;
   onTodoDeleted: (id: number) => void;
   onTodoEdited: (todo: Todo) => void;
   onTodoCreated: (todo: Todo) => void;
 }
 const Body = ({
   todos,
-  // editingTodo,
-  // setEditingTodo,
-  // onTodoChecked,
   onTodoDeleted,
   onTodoEdited,
   onTodoCreated,
@@ -34,7 +28,7 @@ const Body = ({
 
 
   // On add-todo button clicked
-  const AddBtnClicked = () => {
+  const addBtnClicked = () => {
     setEditingTodo(null)
     setShowTodoDialog(true)
   }
@@ -99,10 +93,11 @@ const Body = ({
       <TodoList items={todos}
         onEdit={_setEditingTodo}
         onCheckChange={onTodoChecked}
-        onDelete={onTodoDeleted} />
-      <AddTodoButton onClick={AddBtnClicked} />
+        onDelete={onTodoDeleted}
+        onCreateAction={() => addBtnClicked()} />
+      <AddTodoButton onClick={addBtnClicked} />
 
-      <TodoDialog show={showTodoDialog}
+      <TodoDialog open={showTodoDialog}
         type={dialogType}
         todo={editingTodo}
         onUpdate={_onTodoEdited}

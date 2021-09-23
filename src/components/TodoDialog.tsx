@@ -3,13 +3,14 @@ import React, { useEffect, useState } from 'react';
 
 import styles from 'components/TodoDialog.module.scss';
 import Todo from 'types/Todo';
+import { getWording, wording_type } from 'Wording';
 
 export enum TodoDialogTypes {
   Create = "CREATE",
   Edit = "EDIT",
 }
 interface TodoDialogInterface {
-  show: boolean;
+  open: boolean;
   type?: TodoDialogTypes;
   todo?: Todo|null; // Binding when `editing type`
   defaultText?: string;
@@ -19,7 +20,7 @@ interface TodoDialogInterface {
   onCancel?: any;
 }
 const TodoDialog = ({
-  show,
+  open,
   type = TodoDialogTypes.Create,
   todo,
   defaultText = "",
@@ -27,9 +28,26 @@ const TodoDialog = ({
   onUpdate,
   onCancel,
 }: TodoDialogInterface) => {
+
+  const {
+    title: _title = "Write title",
+  } = todo ? todo : {}
+  const isCreateMode = type === TodoDialogTypes.Create // Is create mode
   
-  const [ title, setTitle ] = useState(defaultText)
-  const [ showWarn, setShowWarn ] = useState(false)
+  const [ title, setTitle ] = useState(defaultText) // Current editing `title` state
+  const [ showWarn, setShowWarn ] = useState(false) // Show restriction snack-bar state
+  const [ inputPlaceholder, setInputPlaceholder ] = useState("") // Placeholder value for input field  state
+
+  // Fetch palceholder wording when state `open` is true
+  useEffect(() => {
+    if (!open) { // Set `inputPlaceholder` state to blank('') after 200ms for animation
+      setTimeout(() => {
+        setInputPlaceholder("") 
+      }, 200)
+    } else { // Set `inputPlaceholder` state to by `isCreateMode` flag 
+      setInputPlaceholder(isCreateMode ? getWording(wording_type.create_todo) : _title)
+    }
+  }, [open])
 
   useEffect(() => {
     setTitle(defaultText)
@@ -81,18 +99,18 @@ const TodoDialog = ({
     }
   }
 
-  // Decision displayed word in title prefix of dialog
-  const displayedTitlePrefix = type === TodoDialogTypes.Create ? "Create" : "Edit"
-  const displayedConfirmBtnText = type === TodoDialogTypes.Create ? "Create" : "Update"
+  // Displayed word in title prefix of dialog
+  const displayedTitlePrefix = isCreateMode ? "Create" : "Edit"
+  const displayedConfirmBtnText = isCreateMode ? "Create" : "Update"
 
   return (
     <Dialog className={styles.add_todo}
       fullWidth={true}
-      open={show}
+      open={open}
       onClose={_onCancel}>
       <DialogTitle>{displayedTitlePrefix} todo</DialogTitle>
       <DialogContent style={{padding: "0px 24px 8px"}}> {/* Remove top padding */}
-        <TextField autoFocus className={styles.input_todo} label="Title" placeholder="Write todo!"
+        <TextField autoFocus className={styles.input_todo} label="Title" placeholder={inputPlaceholder}
           value={title}
           defaultValue={defaultText}
           onKeyDown={onKeyDown}

@@ -20,6 +20,7 @@ const DEFAULT_ICONS = [
   '📈',
   '😥',
   '⚽',
+  '🖤',
   '📷',
   '🥼',
   '🎈',
@@ -136,7 +137,7 @@ const IconEditor = ({
         </div>
         <div className={styles.input_icon}>
           <TextField className={styles.input}
-            placeholder="Input emoji !"
+            placeholder="Input emoji"
             value={inputedIcon}
             onInput={onInput}
             onKeyPress={onInputKeyPress} />
