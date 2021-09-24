@@ -67,11 +67,11 @@ const TodoDialog = ({
       const createdItem = new Todo(_title, false)
       onCreate && onCreate(createdItem)
     }
-    _onCancel()
+    _onClose()
   }
 
   // On canceled
-  const _onCancel = (e?: any) => {
+  const _onClose = (e?: any) => {
     onCancel && onCancel()
     // setTitle("")
   }
@@ -107,7 +107,7 @@ const TodoDialog = ({
     <Dialog className={styles.add_todo}
       fullWidth={true}
       open={open}
-      onClose={_onCancel}>
+      onClose={_onClose}>
       <DialogTitle>{displayedTitlePrefix} todo</DialogTitle>
       <DialogContent style={{padding: "0px 24px 8px"}}> {/* Remove top padding */}
         <TextField autoFocus className={styles.input_todo} label="Title" placeholder={inputPlaceholder}
@@ -117,9 +117,6 @@ const TodoDialog = ({
           onChange={onChange} />
       </DialogContent>
       <DialogActions>
-        {/* <Button onClick={_onCancel}>
-          Cancel
-        </Button> */}
         <Button variant="contained" color="primary" onClick={onConfirm}>
           {displayedConfirmBtnText}
         </Button>

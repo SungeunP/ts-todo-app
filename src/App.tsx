@@ -1,4 +1,4 @@
-import { Typography } from '@material-ui/core';
+import { CircularProgress, Typography } from '@material-ui/core';
 import TabList from 'components/TabList';
 import SideBar from 'components/SideBar';
 import React, { useEffect, useState } from 'react';
@@ -7,11 +7,11 @@ import Todo, { ITodo } from 'types/Todo';
 import styles from './app.module.scss';
 import Body from './components/body';
 import Header from './components/header';
+import { Settings } from '@material-ui/icons';
+import Button from 'styled-mui-components/Button';
+import SettingDialog from 'components/SettingDialog';
 
 const TODOS_DAILY_TASKS: ITodo[] = [
-  new Todo('저녁에 운동하기', false),
-  new Todo('유튜브 영상 보기', false),
-  new Todo('방 청소하기', false),
   new Todo('저녁에 운동하기', false),
   new Todo('유튜브 영상 보기', false),
   new Todo('방 청소하기', false),
@@ -46,6 +46,8 @@ function App() {
       })
     }
   }
+  
+  const [ showSettings, setShowSettings ] = useState<boolean>(false)
 
   useEffect(() => {
     if (!tabs) { // When initialize
@@ -160,6 +162,10 @@ function App() {
     }
   }
 
+  const onSettingsConfirm = () => {
+    
+  }
+
   const todos = tabSelection?.todos ?? []
 
   return (<>
@@ -176,21 +182,27 @@ function App() {
       )}
       {/* <Typography variant="h5" color="primary" style={{marginTop: '50px'}}> Try create group! </Typography> */}
     </>) : (
-      <Typography variant="h4" color="primary">Loading ..</Typography>
+      <CircularProgress />
+      // <Typography variant="h4" color="primary">Loading ..</Typography>
     )}
-
     
     <SideBar open={showSidebar}
       onClose={onSidebarClose}>
-      {tabs ? (
+      {tabs && (
         <TabList open={showSidebar}
           tabs={tabs}
           onTabClick={onTabClick}
           onTabCreate={onTabCreate} />
-      ) : showSidebar ? (
-        <Typography>Loading ..</Typography>
-      ) : <></>}
+      )}
+      <Button className={styles.setting_btn} variant="contained" color="primary"
+        onClick={() => setShowSettings(true)} >
+        <Settings fontSize="medium" />
+      </Button>
     </SideBar>
+
+    <SettingDialog open={showSettings}
+      onClose={() => setShowSettings(false)}
+      onConfirm={onSettingsConfirm} />
 
     </div>
   </>);
